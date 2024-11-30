@@ -1,6 +1,6 @@
 # Mohsen Lorestani
 **Image:** images/mohsen_lorestani.jpg 
-**Affiliation:** Your Affiliation  
-**Email:** your.email@example.com
+**Affiliation:** Kermanshah Cultural and Music Society 
+**Email:** mohsen.lorestani@mail.com
 ## Bio
-Write a brief bio about yourself, including your interests and what you hope to gain from the workshop.
+I’m Mohsen Lorestani, an Iranian Kurdish singer and songwriter, known for my heartfelt ballads in Persian and Kurdish. My music reflects themes of love, life, and deep emotions, resonating with listeners across cultures.
