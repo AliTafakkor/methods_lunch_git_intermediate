@@ -134,6 +134,8 @@
 1.	Navigate to your forked repository on GitHub.
 2.	Locate your branch (e.g., `add-attendee-<your-name>`).
 3.	Click the **Compare & pull request** button next to your branch.
+
+    ![alt text](<instruction_images/Screenshot 2024-11-30 at 3.26.16 PM.png>)
 4.	Add a meaningful title and description for your pull request:
 	- Title: Add attendee profile for `<your-name>`
 	- Description: Summarize the changes you made. 
@@ -144,3 +146,159 @@
 	- Updated the attendees.json file.
 
 5.	Click **Create pull request** to submit your changes for review.
+
+    ![alt text](<instruction_images/Screenshot 2024-11-30 at 3.30.37 PM.png>)
+
+### Step 6: Review and merge changes
+Depending on your role in the repository, you may need to:
+
+1.	If you are a **contributor without direct access**:
+	- Submit a pull request as outlined in Step 5.
+	- Wait for the repository maintainer or a collaborator to review and approve your pull request.
+	- If feedback is provided, make the requested changes on your branch (Do not forget to push them on your remote repo).
+    - Your updates will automatically appear in the pull request.
+    - Once the pull request is approved, the maintainer will merge it into the main branch.
+
+2.	If you are a **reviewer**:
+	- Review the submitted pull request for correctness and adherence to project guidelines:
+	    - Check for issues in the code, structure, or content.
+	    - Test changes locally if applicable **(by cloning the requester’s forked repository and checking out their branch)**.
+	- Provide feedback through comments if needed.
+	- Approve the pull request if it meets all requirements or request changes if adjustments are necessary.
+
+3.	If you are a **collaborator**:
+    ![alt text](<instruction_images/Screenshot 2024-11-30 at 4.15.44 PM.png>)
+	- After ensuring your pull request has been reviewed and approved (if required), you can directly merge your pull request:
+	    - Review your changes one last time in the pull request interface.
+	    - Click the **Merge pull request** button and confirm the merge.
+	- Optionally, delete your branch after the merge:
+	    - On GitHub: Click **Delete branch** in the pull request interface.
+	    - Locally:
+            ```bash
+            git branch -d <branch-name>
+            git push origin --delete <branch-name>  
+            ```
+
+### Step 7: Sync your forked repository with the original
+Syncing your fork ensures it stays up-to-date with the main repository. This is essential not only after your pull request is merged but also in the following cases:
+
+1.	When other contributors have made changes: If others have contributed to the main repository since you last synced, you’ll need to pull those updates to avoid conflicts in your future work.
+2.	Before starting a new feature or branch: Always sync your fork before starting work on a new branch to ensure you’re building on the latest version of the project.
+3.	When fixing merge conflicts: If you encounter conflicts while merging a pull request or branch, syncing with the main repository can help resolve them.
+
+**How to Sync Your Fork:**
+
+1.	If you haven’t already, add the original repository as an upstream remote:
+    ```bash
+    git remote add upstream https://github.com/AliTafakkor/methods_lunch_git_intermediate.git
+    ```
+2. Verify the remotes:
+    ```bash
+    git remote -v
+    ```
+    You should see:
+    ```bash
+    origin    https://github.com/<your-username>/methods_lunch_git_intermediate.git (fetch)
+    origin    https://github.com/<your-username>/methods_lunch_git_intermediate.git (push)
+    upstream  https://github.com/AliTafakkor/methods_lunch_git_intermediate.git (fetch)
+    upstream  https://github.com/AliTafakkor/methods_lunch_git_intermediate.git (push)
+    ```
+
+3. Pull in changes from the upstream repository:
+    ```bash
+    git fetch upstream
+    ```
+
+    <details>
+    <summary> What's the difference between <code>git fetch</code> and <code>git pull</code>?</summary>
+
+    #### **The Key Difference**
+    - **`git fetch`** downloads the latest changes from the remote repository but does **not** integrate them into your local branch.
+    - **`git pull`** is a combination of `git fetch` and `git merge`, meaning it downloads the changes and immediately merges them into your current branch.
+
+    #### **Detailed Explanation**
+
+    **`git fetch`**
+    - Downloads updates from the remote repository (e.g., new commits, branches, tags) but does not alter your local files or branches.
+    - It’s a way to check for updates without affecting your current work.
+    - After fetching, you can review the updates and decide how to integrate them (e.g., by merging or rebasing).
+
+    *Example Workflow*:
+    ```bash
+    git fetch origin
+    git log origin/main --oneline
+    # Review the fetched changes
+    git merge origin/main
+    ```
+    **`git pull`**
+    - Combines git fetch and git merge into one command.
+    - Automatically downloads and merges changes from the remote branch into your current branch.
+    - It’s quicker but less flexible than fetch, as you don’t get a chance to review changes before merging.
+    
+    *Example Workflow*:
+    ```bash
+    git pull origin main
+    ```
+
+    **When to Use Each**
+
+    <table>
+    <thead>
+        <tr>
+        <th>Command</th>
+        <th>Use Case</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><code>git fetch</code></td>
+        <td>When you want to check for updates without changing your local branch.</td>
+        </tr>
+        <tr>
+        <td><code>git pull</code></td>
+        <td>When you’re ready to immediately merge remote changes into your branch.</td>
+        </tr>
+    </tbody>
+    </table>
+
+    **Best Practice**
+
+    For safety and control, it’s often better to use git fetch followed by git merge. This allows you to review changes and avoid unexpected merges. If you’re confident in the changes, git pull can save time.
+
+    </details>
+
+4.	Merge Updates into Your Local Branch:
+	- Switch to the branch you want to update (usually main):
+    ```bash
+    git checkout main
+    ```
+    - Merge the updates from the upstream branch:
+    ```bash
+    git merge upstream/main
+    ```
+
+5. After merging, push the updates to your fork on GitHub:
+    ```bash
+    git push origin main
+    ```
+
+> Best Practices for Syncing:
+> - **Sync often**: Regularly sync your fork to minimize merge conflicts and stay up-to-date with the main repository.
+> - **Pull before starting work**: Always sync before creating a new branch or making changes to avoid working on outdated code.
+> - **Communicate with collaborators**: If working in a team, coordinate with others to ensure everyone is syncing frequently.
+
+### Step 8: Clean Up Your Workspace
+It’s better to keep your branches short-lived to avoid clutter and confusion in your repository. Once your work is complete and your pull request has been merged, you should clean up your local and remote branches to maintain an organized workspace.
+
+1.	After your pull request is merged, you can safely delete the feature branch from your local repository:
+    ```bash
+    git branch -d add-attendee-<your-name>
+    ```
+
+2.	You should also remove the branch from your fork on GitHub to avoid clutter:
+    ```bash
+    git push origin --delete add-attendee-<your-name>
+    ```
+
+---
+**Congratulations!** 🎉 You’ve completed the workshop and mastered essential Git and GitHub workflows. We hope you’ll use this knowledge to contribute and advance open science. Thank you for participating! 🚀
