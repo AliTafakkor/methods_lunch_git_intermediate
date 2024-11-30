@@ -6,6 +6,75 @@
 **Objective:** By the end of this session, participants will have collaboratively created an interactive web page listing workshop attendees. Each attendee’s profile will include a name, affiliation, email, bio, and a profile image. Participants will learn to manage text-based files (HTML, CSS, and Markdown) and binary files (images) using Git, and experience both the collaborator and forking workflows.
 
 ---
+## Background:
+### Branches in git
+Branches in Git allow you to work on different features, bug fixes, or experiments without affecting the main codebase. They are essential for collaborative and organized development.
+- Why use Branches?
+    - **Isolation**: Keep changes separate from the main branch until they’re ready to merge.
+    - **Collaboration**: Allow multiple developers to work on different tasks simultaneously.
+    - **Experimentation**: Safely test new ideas without risking the stability of the main project.
+- When to use Branches?
+	- **New Feature Development**: Create a branch for each feature.
+	- **Bug Fixes**: Use branches to address issues without disrupting other work.
+	- **Code Reviews**: Submit changes via pull requests from feature branches.
+	- **Testing and Experimentation**: Try out ideas in a branch before deciding to merge or discard them.
+
+Branches make it easier to manage changes and maintain a clean, stable codebase.
+
+### Merging in git
+(adapted form [Git Different Merge Types in Git Demystifying the difference between "Merge", "Fast-Forward Merge", "Squash and Merge" and "Rebase and Merge" on Git](https://lukemerrett.com/different-merge-types-in-git/) by Luke Merrett)
+
+![](https://lukemerrett.com/content/images/2021/08/72823609-8eaf-4f4e-8514-47d1f27ef037.png)
+
+Merging in Git combines changes from one branch into another, typically integrating a feature branch into the main branch. It’s a key part of collaborative workflows.
+
+**Types of Merges** 
+
+1. Merge (default)
+
+    ![](https://lukemerrett.com/content/images/2021/08/906613c7-94fb-41a8-9c74-77895dec7f53.png)
+
+2. Fast-forward
+
+    ![](https://lukemerrett.com/content/images/2021/08/6fbbe0c4-e8fe-4663-bbf8-19fa6c593bae.png)
+
+3. Squash
+
+    ![](https://lukemerrett.com/content/images/2021/08/fa7e8e52-7037-40f9-a1fd-3dcc916d9840.png)
+
+4. Rebase
+
+    ![](https://lukemerrett.com/content/images/2021/08/c44e8334-f187-4386-8946-d7996f883de3.png)
+
+| Merge Strategy       | Process                                                                 | Advantages                              | Disadvantages                                 | Commands                                                                                              |
+|-----------------------|-------------------------------------------------------------------------|-----------------------------------------|----------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Merge**            | Creates a merge commit that combines the feature branch into the base branch. | ✅ Preserves full history; shows when branches were merged. | ⚠️ Clutters history with merge commits.         | `git checkout main`<br>`git merge <feature-branch>`                                                  |
+| **Fast-Forward Merge** | Moves the base branch pointer forward to include the feature branch commits. | ✅ Produces a clean, linear history.      | ⚠️ Hides the branching process.                 | `git checkout main`<br>`git merge --ff-only <feature-branch>`                                        |
+| **Squash and Merge**  | Combines all feature branch commits into a single commit before merging. | ✅ Keeps history concise.                 | ⚠️ Loses individual commit details.             | `git checkout main`<br>`git merge --squash <feature-branch>`<br>`git commit -m "Add feature <desc>"` |
+| **Rebase and Merge**  | Replays feature branch commits onto the base branch, creating a linear history. | ✅ Produces a clean history without merge commits. | ⚠️ Rewrites history, which can cause issues in shared branches. | `git checkout <feature-branch>`<br>`git rebase main`<br>`git checkout main`<br>`git merge <feature-branch>` |
+
+<details>
+<summary> Resolving merge conflicts</summary>
+Conflicts occur when changes in both branches affect the same lines of code or file structure, and Git cannot resolve them automatically.
+
+Steps to Resolve Merge Conflicts
+
+1.	Identify Conflicts:
+    - Git will pause the merge and show a list of conflicted files.
+    - Use git status to see which files have conflicts.
+2.	Edit Conflicted Files:
+    - Open the files with conflicts in your text editor.
+    - Look for conflict markers (<<<<<<, ======, >>>>>>) that indicate the conflicting changes.
+    - Resolve the conflict by choosing one side, combining changes, or rewriting the section.
+3.	Once the conflicts are resolved, mark the files as resolved by staging them:
+    ```bash
+    git add <file-name>
+    ```
+4.	Commit the merge to finalize it:
+    ```bash
+    git commit
+    ```
+</details>
 
 ## Instructions:
 
